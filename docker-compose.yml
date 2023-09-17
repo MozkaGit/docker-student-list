@@ -1,0 +1,53 @@
+version: '3.3'
+services:
+    api-app.img:
+        image: mozkadocker/student-app
+        container_name: api-app
+        networks:
+            - students-network
+        ports:
+            - '5000:5000'
+        volumes:
+            - './simple_api/:/data/'
+    
+    php:
+        image: 'php:7.2-apache'
+        container_name: web-app
+        networks: 
+            - students-network
+        ports:
+            - '80:80'
+        volumes:
+            - './website/:/var/www/html'
+        environment:
+            - USERNAME=toto
+            - PASSWORD=python
+    
+    registry:
+        image: 'registry:2.7'
+        container_name: registry-pozos
+        networks:
+            - registry-network
+        ports:
+            - '5001:5000'
+        environment:
+            - REGISTRY_STORAGE_DELETE_ENABLED=true
+
+    docker-registry-ui:
+        image: 'joxit/docker-registry-ui:1.5-static'
+        container_name: frontend-pozos
+        networks:
+            - registry-network
+        ports:
+            - '8090:80'
+        environment:
+            - REGISTRY_URL=http://registry-pozos:5000
+            - DELETE_IMAGES=true
+            - REGISTRY_TITLE=POZOS
+            - SINGLE_REGISTRY=true
+
+networks:
+  students-network:
+    driver: bridge
+  registry-network:
+    driver: bridge
