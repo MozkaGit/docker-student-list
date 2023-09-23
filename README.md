@@ -1,4 +1,4 @@
-## Docker student-list
+## Docker student-list<br>[![Docker build and release](https://github.com/MozkaGit/docker-student-list/actions/workflows/registry.yaml/badge.svg)](https://github.com/MozkaGit/docker-student-list/actions/workflows/registry.yaml)</br>
 
 Ce mini projet est en trois partie.
 
