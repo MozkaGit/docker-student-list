@@ -54,4 +54,4 @@ jobs:
           platforms: ${{ env.TARGET_PLATFORMS }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          context: simple_api/Dockerfile
+          context: ./simple_api/
